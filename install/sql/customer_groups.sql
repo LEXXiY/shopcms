@@ -1,0 +1,2 @@
+insert into CUSTGROUPS_TABLE( custgroupID, custgroup_name, custgroup_discount, sort_order ) values ( 1, 'Розница', 0, 0 );
+insert into CUSTGROUPS_TABLE( custgroupID, custgroup_name, custgroup_discount, sort_order ) values ( 2, 'Опт', 5, 1 );

@@ -1,0 +1,7 @@
+User-Agent: *
+Disallow: /index.php?
+Disallow: /?
+Disallow: /cart.html
+Disallow: /wide_search.html
+Disallow: /feedback.html
+Disallow: /compare.html

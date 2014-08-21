@@ -1,0 +1,1 @@
+INSERT INTO PAYMENT_TYPES_TABLE (PID, Name, description, email_comments_text, Enabled, calculate_tax) VALUES (1, 'Наличные', 'оплата наличными курьеру', 'Спасибо!', 1, 1);

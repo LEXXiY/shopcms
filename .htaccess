@@ -1,0 +1,69 @@
+#####################################
+# ShopCMS: Скрипт интернет-магазина
+# Copyright (c) by ADGroup
+# http://shopcms.ru
+#####################################
+  
+Options +FollowSymlinks -Indexes -MultiViews
+DirectoryIndex index.php
+ErrorDocument 404 /404.html
+
+php_value session.use_trans_sid    0
+php_value session.use_cookies      1
+php_value session.use_only_cookies 1
+php_value session.auto_start       0
+php_value magic_quotes_gpc         0 
+php_value register_globals         0
+php_value display_errors           0
+php_value magic_quotes_runtime     0
+php_value allow_url_fopen          1
+
+RewriteEngine On
+RewriteBase /
+RewriteCond %{THE_REQUEST} /(\.+) [OR]
+RewriteCond %{THE_REQUEST} /(\?+) [OR]
+RewriteCond %{THE_REQUEST} /(/+)
+RewriteRule ^(.*)$ 404.html [L]
+RewriteRule ^core/(install|temp|smarty|modules|languages|includes|functions|fonts|files|config|classes|cache|backup)/(.*) - [F]
+RewriteRule ^data/(.+)\.(tpl\.html|php|php3|php4|php5|phtml|pl|cgi) - [F]
+RewriteRule ^install_check\.html$ install.php?check=yes [L]
+RewriteRule ^index\.html$ index.php [L]
+RewriteRule ^news\.html$ index.php?news=yes [L]
+RewriteRule ^price\.html$ index.php?show_price=yes [L]
+RewriteRule ^cart\.html$ index.php?shopping_cart=yes [L]
+RewriteRule ^wide_search\.html$ index.php?search_with_change_category_ability=yes [L]
+RewriteRule ^feedback\.html$ index.php?feedback=yes [L]
+RewriteRule ^compare\.html$ index.php?comparison_products=yes [L]
+RewriteRule ^page_([0-9]+)\.html$ index.php?show_aux_page=$1 [L]
+RewriteRule ^product_([0-9]+)\.html$ index.php?productID=$1 [L]
+RewriteRule ^category_([0-9]+)\.html$ index.php?categoryID=$1 [L]
+RewriteRule ^category_([0-9]+)_offset_([0-9]+)\.html$ index.php?categoryID=$1&offset=$2 [L]
+RewriteRule ^category_([0-9]+)_show_all\.html$ index.php?categoryID=$1&show_all=yes [L]
+RewriteRule ^show_news_([0-9]+)\.html$ index.php?fullnews=$1 [L]
+
+<IfModule mod_nginx.c>
+# Блок правил для сервера Nginx. 
+# В случае его использования необходимо вставить нижеуказанные правила в файл nginx.conf в секцию location/ для вашего сайта.
+
+location ~* /core/(install|temp|smarty|modules|languages|includes|functions|fonts|files|config|classes|cache|backup)/(.*) {
+return 403;
+}
+
+location ~* /data/(.+)\.(tpl\.html|php|php3|php4|php5|phtml|pl|cgi) {
+return 403;
+}
+rewrite ^/install_check\.html$ /install.php?check=yes last;
+rewrite ^/index\.html$ /index.php last;
+rewrite ^/news\.html$ /index.php?news=yes  last;
+rewrite ^/price\.html$ /index.php?show_price=yes  last;
+rewrite ^/cart\.html$ /index.php?shopping_cart=yes  last;
+rewrite ^/wide_search\.html$ /index.php?search_with_change_category_ability=yes  last;
+rewrite ^/feedback\.html$ /index.php?feedback=yes  last;
+rewrite ^/compare\.html$ /index.php?comparison_products=yes  last;
+rewrite ^/page_([0-9]+)\.html$ /index.php?show_aux_page=$1  last;
+rewrite ^/product_([0-9]+)\.html$ /index.php?productID=$1  last;
+rewrite ^/category_([0-9]+)\.html$ /index.php?categoryID=$1  last;
+rewrite ^/category_([0-9]+)_offset_([0-9]+)\.html$ /index.php?categoryID=$1&offset=$2  last;
+rewrite ^/category_([0-9]+)_show_all\.html$ /index.php?categoryID=$1&show_all=yes  last;
+rewrite ^/show_news_([0-9]+)\.html$ /index.php?fullnews=$1  last;
+</IfModule>

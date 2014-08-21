@@ -1,0 +1,1 @@
+INSERT INTO SHIPPING_METHODS_TABLE (SID, Name, description, email_comments_text, Enabled) VALUES (1, 'Курьер', 'доставка по Москве', 'Доставка в течение 1-2 дней', 1);
